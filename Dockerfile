@@ -12,7 +12,7 @@ RUN set -eux; \
         echo "❌ Error: CADDY_VERSION is not set!"; \
         exit 1; \
     fi; \
-    echo "✅ Building Caddy version: v${CADDY_VERSION}"; \
+    echo "✅ Building Caddy version: ${CADDY_VERSION}"; \
     \
     MOD_ARGS=""; \
     if [ -n "${CADDY_MODULES}" ]; then \
