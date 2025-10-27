@@ -1,16 +1,30 @@
-ARG CADDY_VERSION=2.10.2
+ARG CADDY_VERSION
 
 FROM caddy:${CADDY_VERSION}-builder AS builder
 
-ARG CADDY_MODULES=github.com/caddy-dns/tencentcloud
-
-RUN echo "Building Caddy version: ${RUNNER_ARCH}" && \
-    echo "With modules: ${RUNNER_VERSION}"
+ARG CADDY_MODULES
 
 RUN echo "Building Caddy version: ${CADDY_VERSION}" && \
     echo "With modules: ${CADDY_MODULES}"
 
-RUN xcaddy build --with ${CADDY_MODULES} --output /usr/bin/caddy
+RUN set -eux; \
+    if [ -z "${CADDY_VERSION}" ]; then \
+        echo "❌ Error: CADDY_VERSION is not set!"; \
+        exit 1; \
+    fi; \
+    echo "✅ Building Caddy version: v${CADDY_VERSION}"; \
+    \
+    MOD_ARGS=""; \
+    if [ -n "${CADDY_MODULES}" ]; then \
+        for m in $(echo "${CADDY_MODULES}" | tr ',' ' '); do \
+            MOD_ARGS="${MOD_ARGS} --with ${m}"; \
+        done; \
+        echo "Using modules: ${CADDY_MODULES}"; \
+    else \
+        echo "⚠️  No modules specified, building pure Caddy"; \
+    fi; \
+    \
+    xcaddy build ${MOD_ARGS}
 
 FROM caddy:${CADDY_VERSION}
 
