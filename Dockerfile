@@ -1,12 +1,12 @@
-ARG CADDY_VERSION
-ARG CADDY_MODULES
+ARG CADDY_VERSION=2.10.2
+ARG CADDY_MODULES=github.com/caddy-dns/tencentcloud
+
+FROM caddy:${CADDY_VERSION}-builder AS builder
 
 RUN echo "Building Caddy version: ${CADDY_VERSION}" && \
     echo "With modules: ${CADDY_MODULES}"
 
-FROM caddy:${CADDY_VERSION}-builder AS builder
-
-RUN xcaddy build --with github.com/caddy-dns/tencentcloud
+RUN xcaddy build --with ${CADDY_MODULES} --output /usr/bin/caddy
 
 FROM caddy:${CADDY_VERSION}
 
