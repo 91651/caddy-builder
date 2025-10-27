@@ -15,7 +15,7 @@ on:
         description: 'Caddy version (e.g. 2.10.2)'
         required: true
         default: '2.10.2'
-      modules:
+      cmodules:
         description: 'Caddy modules (optional)'
         required: true
         default: 'github.com/caddy-dns/tencentcloud'
@@ -60,7 +60,7 @@ jobs:
           tags: |
             docker.io/${{ inputs.docker_hub_username }}/caddy:${{ inputs.version }}
           build-args: |
-            CADDY_MODULES=${{ inputs.modules }}
+            CADDY_MODULES=${{ inputs.cmodules }}
             CADDY_VERSION=${{ inputs.version }}
           # cache（如果需要加速后续构建）：取消下面注释并配置
           # cache-from: type=gha
