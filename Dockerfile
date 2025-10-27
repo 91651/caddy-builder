@@ -1,7 +1,7 @@
 ARG CADDY_VERSION="2.10.2"
 ARG CADDY_MODULES="github.com/caddy-dns/tencentcloud"
 
-FROM caddy:${CADDY_VERSION}-builder AS builder
+FROM caddy:2.10.2-builder AS builder
 
 RUN echo "Building Caddy version: ${CADDY_VERSION}" && echo "With modules: ${CADDY_MODULES}"
 
