@@ -1,5 +1,5 @@
-ARG CADDY_VERSION=2.10.2
-ARG CADDY_MODULES=github.com/caddy-dns/tencentcloud
+ARG CADDY_VERSION="2.10.2"
+ARG CADDY_MODULES="github.com/caddy-dns/tencentcloud"
 
 FROM caddy:${CADDY_VERSION}-builder AS builder
 
