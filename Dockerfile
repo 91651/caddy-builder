@@ -1,9 +1,9 @@
-ARG CADDY_MODULES="github.com/caddy-dns/tencentcloud"
-ARG CADDY_VERSION="2.10.2"
+ARG RUNNER_VERSION="qqq"
+ARG RUNNER_ARCH="x64"
 
 FROM caddy:2.10.2-builder AS builder
 
-RUN echo "Building Caddy version: ${CADDY_MODULES}" && echo "With modules: ${CADDY_VERSION}"
+RUN echo "Building Caddy version: ${RUNNER_VERSION}" && echo "With modules: ${RUNNER_ARCH}"
 
 RUN xcaddy build --with ${CADDY_MODULES} --output /usr/bin/caddy
 
