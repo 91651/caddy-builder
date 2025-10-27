@@ -47,14 +47,14 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          platforms: ${{ inputs.archs }}                 # 从输入接收架构
+          platforms: ${{ inputs.archs }}
           push: true
           tags: |
             docker.io/${{ secrets.DOCKERHUB_USERNAME }}/caddy-custom:${{ inputs.version }}
           build-args: |
             CADDY_VERSION=${{ inputs.version }}
             CADDY_MODULES=${{ inputs.modules }}
-          # 可选 cache（如果需要加速后续构建）：取消下面注释并配置
+          # cache（如果需要加速后续构建）：取消下面注释并配置
           # cache-from: type=gha
           # cache-to: type=gha,mode=max
 
