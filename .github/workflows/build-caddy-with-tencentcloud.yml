@@ -18,7 +18,7 @@ on:
       modules:
         description: 'Caddy modules (optional)'
         required: false
-        default: 'github.com/caddyserver/transform-encoder'
+        default: 'github.com/caddy-dns/tencentcloud'
       archs:
         description: 'Target platforms'
         required: false
@@ -58,7 +58,7 @@ jobs:
           platforms: ${{ inputs.archs }}
           push: true
           tags: |
-            docker.io/${{ github.event.inputs.docker_hub_username }}/caddy-custom:${{ inputs.version }}
+            docker.io/${{ github.event.inputs.docker_hub_username }}/caddy:${{ inputs.version }}
           build-args: |
             CADDY_VERSION=${{ inputs.version }}
             CADDY_MODULES=${{ inputs.modules }}
@@ -69,4 +69,4 @@ jobs:
       - name: Show pushed tags
         run: |
           echo "Pushed tags:"
-          echo "docker.io/${{ github.event.inputs.docker_hub_username }}/caddy-custom:${{ inputs.version }}"
+          echo "docker.io/${{ github.event.inputs.docker_hub_username }}/caddy:${{ inputs.version }}"
