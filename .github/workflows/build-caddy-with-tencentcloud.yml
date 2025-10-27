@@ -59,9 +59,6 @@ jobs:
           push: true
           tags: |
             docker.io/${{ inputs.docker_hub_username }}/caddy:${{ inputs.version }}
-          build-args: |
-            CADDY_MODULES=${{ inputs.cmodules }}
-            CADDY_VERSION=${{ inputs.version }}
           # cache（如果需要加速后续构建）：取消下面注释并配置
           # cache-from: type=gha
           # cache-to: type=gha,mode=max
