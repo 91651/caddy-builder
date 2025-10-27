@@ -6,13 +6,7 @@ RUN echo "Building Caddy version: ${CADDY_VERSION}" && \
 
 FROM caddy:${CADDY_VERSION}-builder AS builder
 
-RUN set -ex; \
-    MOD_ARGS=""; \
-    for m in $(echo ${CADDY_MODULES} | tr ',' ' '); do \
-        MOD_ARGS="${MOD_ARGS} --with ${m}"; \
-    done; \
-    echo "Running: xcaddy build v${CADDY_VERSION} ${MOD_ARGS}"; \
-    xcaddy build v${CADDY_VERSION} ${MOD_ARGS}
+RUN xcaddy build --with github.com/caddy-dns/tencentcloud
 
 FROM caddy:${CADDY_VERSION}
 
