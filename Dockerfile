@@ -3,8 +3,7 @@ ARG CADDY_MODULES=github.com/caddy-dns/tencentcloud
 
 FROM caddy:${CADDY_VERSION}-builder AS builder
 
-RUN echo "Building Caddy version: ${CADDY_VERSION}" && \
-    echo "With modules: ${CADDY_MODULES}"
+RUN echo "Building Caddy version: ${CADDY_VERSION}" && echo "With modules: ${CADDY_MODULES}"
 
 RUN xcaddy build --with ${CADDY_MODULES} --output /usr/bin/caddy
 
