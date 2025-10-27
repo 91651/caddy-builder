@@ -1,9 +1,8 @@
-ARG RUNNER_VERSION="qqq"
-ARG RUNNER_ARCH="x64"
 ARG CADDY_VERSION=2.10.2
-ARG CADDY_MODULES=github.com/caddy-dns/tencentcloud
 
 FROM caddy:${CADDY_VERSION}-builder AS builder
+
+ARG CADDY_MODULES=github.com/caddy-dns/tencentcloud
 
 RUN echo "Building Caddy version: ${RUNNER_ARCH}" && \
     echo "With modules: ${RUNNER_VERSION}"
