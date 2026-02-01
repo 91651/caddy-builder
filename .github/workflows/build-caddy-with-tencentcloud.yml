@@ -59,6 +59,7 @@ jobs:
           push: true
           tags: |
             docker.io/${{ inputs.docker_hub_username }}/caddy:${{ inputs.version }}
+            docker.io/${{ inputs.docker_hub_username }}/caddy:latest
           build-args: |
             CADDY_VERSION=${{ inputs.version }}
             CADDY_MODULES=${{ inputs.modules }}
@@ -70,3 +71,4 @@ jobs:
         run: |
           echo "Pushed tags:"
           echo "docker.io/${{ inputs.docker_hub_username }}/caddy:${{ inputs.version }}"
+          echo "docker.io/${{ inputs.docker_hub_username }}/caddy:latest"
