@@ -18,7 +18,7 @@ on:
       modules:
         description: 'Caddy modules (optional)'
         required: false
-        default: 'github.com/caddy-dns/tencentcloud'
+        default: 'github.com/caddy-dns/tencentcloud,github.com/mholt/caddy-l4'
       tag:
         description: 'Image tag (optional, default is version)'
         required: false
