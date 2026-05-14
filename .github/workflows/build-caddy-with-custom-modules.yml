@@ -19,8 +19,12 @@ on:
         description: 'Caddy modules (optional)'
         required: false
         default: 'github.com/caddy-dns/tencentcloud'
+      tag:
+        description: 'Image tag (optional, default is version)'
+        required: false
+        default: ''
       archs:
-        description: 'Target platforms'
+        description: 'Image platforms'
         required: false
         default: 'linux/amd64,linux/arm64'
 
@@ -58,8 +62,8 @@ jobs:
           platforms: ${{ inputs.archs }}
           push: true
           tags: |
-            docker.io/${{ inputs.docker_hub_username }}/caddy:${{ inputs.version }}
-            docker.io/${{ inputs.docker_hub_username }}/caddy:latest
+            ${{ inputs.docker_hub_username }}/caddy:${{ inputs.tag || inputs.version }}
+            ${{ !contains(inputs.version, '-') && !inputs.tag && format('{0}/caddy:latest', inputs.docker_hub_username) || '' }}
           build-args: |
             CADDY_VERSION=${{ inputs.version }}
             CADDY_MODULES=${{ inputs.modules }}
@@ -70,5 +74,7 @@ jobs:
       - name: Show pushed tags
         run: |
           echo "Pushed tags:"
-          echo "docker.io/${{ inputs.docker_hub_username }}/caddy:${{ inputs.version }}"
-          echo "docker.io/${{ inputs.docker_hub_username }}/caddy:latest"
+          echo "${{ inputs.docker_hub_username }}/caddy:${{ inputs.tag || inputs.version }}"
+          if [[ "${{ inputs.version }}" != *-* && -z "${{ inputs.tag }}" ]]; then
+            echo "${{ inputs.docker_hub_username }}/caddy:latest"
+          fi
